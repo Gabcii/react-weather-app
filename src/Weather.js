@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import "./Weather.css";
 import axios from "axios";
 import WeatherInfo from "./WeatherInfo";
+import WeatherIcon from "./WeatherIcon";
+import WeatherForecast from "./WeatherForecast";
 
 export default function Weather(props) {
   const [city, setCity] = useState(props.defaultCity);
@@ -13,11 +15,12 @@ export default function Weather(props) {
         temperature: Math.round(response.data.temperature.current),
         city: response.data.city,
         date: new Date(response.data.time * 1000),
-        description: response.data.condition.description,
+        description: response.data.condition?.description || "",
         humidity: response.data.temperature.humidity,
         ready: true,
         wind: response.data.wind.speed,
-        iconUrl: response.data.condition.icon_url,
+        icon: response.data.condition?.icon || "clear-sky-day",
+        iconUrl: response.data.condition?.icon_url || "",
       });
     } else {
       alert("The city does not exist. Please try again!");
@@ -62,6 +65,7 @@ export default function Weather(props) {
           </div>
         </form>
         <WeatherInfo data={weatherData} />
+        <WeatherForecast city={weatherData.city} />
       </div>
     );
   } else {
