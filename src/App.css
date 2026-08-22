@@ -4,5 +4,9 @@
 }
 .App footer {
   font-size: 11px;
-  margin: 10px 0;
+  margin: 15px 0;
+  width: 100%;
+  text-align: center;
+  display: block;
+  letter-spacing: 1.5px;
 }
